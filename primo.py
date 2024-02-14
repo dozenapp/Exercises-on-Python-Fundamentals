@@ -9,3 +9,4 @@ print(sqrt(10))
 # dato un triangolo rettangolo i cui cateti sono lunghi rispettivamente
 # 10.123 e 30.456
 # calcolare la lunghezza dell'ipotenusa
+print("Ipotenusa = ", sqrt(10.123**2 + 30.456**2))
