@@ -188,3 +188,13 @@ stanza = stanza[2:]
 print(stanza)
 stanza.sort()
 print(stanza)
+
+
+numeri = []
+for i in range(1000000):
+    numeri.append(random.random())
+
+print(sum(numeri))
+somma = 0
+for v in numeri:
+    somma += v
