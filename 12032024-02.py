@@ -99,6 +99,7 @@ if False:
 
 c = 10
 
+
 def Cambia(a, b):
     d = 90
     a = b
@@ -208,8 +209,8 @@ print(GeneraListaDigit())
 
 
 # Data una stringa numerica (es: "98123"), convertirla in una lista di digit [9,8,1,2,3]
-def StringDigitsToList(sd):
-    #...
+# def StringDigitsToList(sd):
+# ...
 
 # Esempio di utilizzo
 # print(StringDigitsToList("918357"))
@@ -222,12 +223,16 @@ def GeneraListaDigit():
     lista = []
     for i in range(0, 10000):
         s = str(i)
-        while len(s) < 4:
-            s = "0" + s
-        # devo modificare s in lista di digit
-        # s, esempio, è "3410" => [3,4,1,0]
-        l1 = []
-        for c in s:
-            l1.append(int(c))
-        lista.append(l1)
+        s = "0" * (4 - len(s)) + s
+        # s = s.zfill(4)
+        # while len(s) < 4:
+        #     s = "0" + s
+        lista.append(s)
     return lista
+
+
+# lista1 = [0, 9, 8, 7, 6]
+## lista2 = [0, 9, 8, 7, 6]
+
+# for lista2 in lista1:
+#     print(lista2)
