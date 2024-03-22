@@ -125,3 +125,73 @@ print(
     "Calciatori italia e argentina: ",
     calciatoriItalia.intersection(calciatoriArgentina),
 )
+
+# # {1,2,3,4} intersezione {3,2,9,7,6,5} => {2,3}
+# s1 = set([1, 2, 3, 4])
+# s2 = set([3, 2, 9, 7, 6, 5])
+# print(s1.intersection(s2))
+
+# int("12345") => 12345
+# set(x) => trasforma x in un set
+# list(x) trasforma x in una lista
+
+# 6) Trovare qual'è il calciatore più giovane che ha partecipato alla coppa del mondo
+# 7) Trovare qual'è il calciatore più anziano che ha partecipato alla coppa del mondo
+elenco_eta_calciatore = []
+for calciatore in worldcup:
+    anno_campionato = calciatore["Year"]
+    anno_nascita = calciatore["DateOfBirth"].split("-")[0]
+    if anno_nascita != "":  # elimino anni non presenti
+        eta = anno_campionato - int(anno_nascita)
+        elenco_eta_calciatore.append((eta, calciatore))
+
+# print(elenco_eta_calciatore)
+# devo trovare il più giovane e il più vecchio
+etamax = 0
+etamin = 200
+cmax = None
+cmin = None
+for c in elenco_eta_calciatore:
+    if c[0] < etamin:
+        etamin, cmin = c
+        # etamin=c[0]
+        # cmin=c[1]
+    if c[0] > etamax:
+        etamax, cmax = c
+print(cmin, cmax)
+
+# 8) Trovare quale calciatore ha partecipato a più edizioni della coppa del mondo
+# posso usare fullname concatenato a date of birth
+calciatori = dict()
+# come risultato vorrei in dizionario che come chiave ha il nome del calciatore e come valore ha quante il calciatore è presente nell'elenco
+for c in worldcup:
+    key = c["FullName"] + ":" + c["DateOfBirth"]
+    if key in calciatori.keys():
+        calciatori[key] = calciatori[key] + 1
+    else:
+        calciatori[key] = 1
+
+massimo = 0
+calciatore = None
+for chiave, valore in calciatori.items():
+    if chiave.split(":")[0] != "":
+        if valore > massimo:
+            massimo = valore
+            calciatore = chiave
+print(massimo, calciatore)
+
+# 9) Trovare quale squadra di calcio ha fornito più calciatori per la coppa del mondo
+#    Organizzare per nazione. Cioè quale squadra italiana ha fornito più calciatori per la coppa del mondo e quanti, quale squadra francese, ...
+squadre = dict()
+for c in worldcup:
+    if c["Club"] in squadre.keys():
+        squadre[c["Club"]] += 1
+    else:
+        squadre[c["Club"]] = 1
+
+massimo = 0
+squadra = None
+for s in squadre.items():
+    if s[1] > massimo:
+        squadra, massimo = s
+print(massimo, squadra)
