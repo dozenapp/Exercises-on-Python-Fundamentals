@@ -1,1 +1,2 @@
-print("Buongiorno")
+# cosa faremo oggi?
+# un esempio di progetto segmentato
