@@ -14,12 +14,13 @@
 # sia data una seconda lista <lsCheck>, costruita esattamente
 # come la precendente, ovviamente con valori diversi,
 # ma sempre nel rispetto del valore N
+import copy
 import random
 
 
-N = 6
-ls = [1, 3, 2, 2, 5, 6]
-lsCheck = [2, 3, 3, 6, 6, 4]
+# N = 6
+# ls = [1, 3, 2, 2, 5, 6]
+# lsCheck = [2, 3, 3, 6, 6, 4]
 
 # Scrivere una funzione alla quale passerete
 # come parametri ls e lsCheck e la funzione deve riportare
@@ -40,24 +41,22 @@ lsCheck = [2, 3, 6, 6, 4]
 # Nel nostro esempio la funzione torna:
 # c'è il 2 nella ls?
 # sì, lo tolgo
-ls = [
-    1,
-    2,
-    5,
-]
+ls = [1, 2, 5, 3, 3]
 lsCheck = [2, 3, 6, 6, 4]
 
 
-ls = [1, 4, 1]
+ls = [
+    1,
+    4,
+    1,
+    4,
+    1,
+]
 lsCheck = [5, 5, 5, 3, 6]
-uguali = 2
-diversi = 2
 
 
-ls = [6, 6, 5]
+ls = [6, 6, 5, 1, 1]
 lsCheck = [3, 4, 4, 1, 4]
-uguali = 3
-diversi = 2
 
 
 # Genera una lista che contiene N numeri casuali tra 1 e N
@@ -69,6 +68,7 @@ def GeneraLista(N):
     return lista
 
 
+# Non più utilizzato
 def ContaUguali(ls, lsCheck):
     uguali = 0
     for i in range(len(ls)):
@@ -77,9 +77,59 @@ def ContaUguali(ls, lsCheck):
     return uguali
 
 
-N = 8
+def ContaUgualiInStessoEInAltro(ls, lsCheck):
+    ls = ls.copy()
+    lsCheck = lsCheck.copy()
+    # Conteggio e elimino gli elementi nello stesso posto
+    stessoPosto = 0
+    for i in range(len(lsCheck)):
+        if lsCheck[i] == ls[i]:
+            stessoPosto += 1
+            ls[i] = None
+            lsCheck[i] = None
+
+    # Conteggio e elimino gli elementi in posto differente
+    altroPosto = 0
+    for v in lsCheck:
+        if v != None and v in ls:
+            altroPosto += 1
+            ls.remove(v)
+    return stessoPosto, altroPosto
+
+
 l1 = GeneraLista(N)
 l2 = GeneraLista(N)
 print(l1)
 print(l2)
-print(ContaUguali(l1, l2))
+strike, ball = ContaUgualiInStessoEInAltro(l1, l2)
+print(strike, ball)
+print(l1)
+print(l2)
+
+# a = [None, None, 1, 2, 1, 2]
+# b = [None, None, 3, 4, 2, 1]
+
+
+# l1 = [1, [2, 3], 4, [5, 6]]
+# l4 = l1
+# l2 = copy.copy(l1)
+# l3 = copy.deepcopy(l1)
+# l1.append("HEHEHE")
+# l4[2] = "HAHAHA"
+# # l4[3][1] = "HUHUHU"
+# print(l1, "\n", l2, "\n", l3, "\n", l4, sep="")
+
+
+# def Alter1(l1):
+#     l1[0] = "HOHOHO"
+
+
+# def Alter2(l1):
+#     l1 = ["HIHIHI"]
+
+
+# Alter1(l1)
+# print(l1, "\n", l2, "\n", l3, "\n", l4, sep="")
+
+# Alter2(l1)
+# print(l1, "\n", l2, "\n", l3, "\n", l4, sep="")
