@@ -31,25 +31,8 @@ def ContaUgualiInStessoEInAltro(ls, lsCheck):
     return stessoPosto, altroPosto
 
 
-N = int(input("Inserire il numero di simboli: "))
-M = int(input("Inserire la lunghezza della lista: "))
-l1 = GeneraLista(N, M)
-l2 = GeneraLista(N, M)
-print(l1)
-print(l2)
-strike, ball = ContaUgualiInStessoEInAltro(l1, l2)
-print(strike, ball)
-print(l1)
-print(l2)
-
-
 def ConvertiStringaDigitInListaNumeri(sd):
     return [int(x) for x in list(sd)]
-
-
-# Esempio di utilizzo:
-sd = input("Inserisci la tua prova: ")
-print(ConvertiStringaDigitInListaNumeri(sd))
 
 
 # Progetto da svolgere
@@ -77,3 +60,21 @@ Il gioco del master mind consiste in:
            ovviamente, con una nuova proposta, es 2156 => [2,1,5,6]
         ecc, ecc, ecc
 """
+N = int(input("Inserire il numero di simboli: "))
+M = int(input("Inserire la lunghezza della lista: "))
+
+# Genero il mio segreto
+segreto = GeneraLista(N, M)
+
+# # Vediamo se è vero
+# print(segreto)
+
+while True:
+    proposta = input("Inserire proposta: ")
+    # Devo far diventare la proposta una lista
+    proposta = ConvertiStringaDigitInListaNumeri(proposta)
+    strike, ball = ContaUgualiInStessoEInAltro(proposta, segreto)
+    print("Strike: ", strike, ". Ball: ", ball)
+    if strike == M:
+        print("Bravo hai vinto")
+        break
